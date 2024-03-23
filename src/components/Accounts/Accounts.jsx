@@ -4,6 +4,9 @@ import React from "react";
 // STYLE
 import "./accounts.css";
 
+// COMPOSANTS
+import Button from "../Button/Button";
+
 function Accounts(props) {
   // Déstructure les propriétés passées en tant que "props"
   // Elles peuvent être utilisées sans utiliser props.(propriétés)...
@@ -16,7 +19,9 @@ function Accounts(props) {
           <p className="account-amount">{amount}</p>
           <p className="account-amount-description">{description}</p>
         </div>
-        <div className="account-content-wrapper cta"></div>
+        <div className="account-content-wrapper cta">
+          <Button className="transaction-button" text="View transactions" />
+        </div>
       </section>
     </>
   );

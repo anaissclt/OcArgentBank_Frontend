@@ -4,6 +4,9 @@ import React from "react";
 // STYLE
 import "./user.css";
 
+// COMPOSANTS
+import Button from "../Button/Button";
+
 function User() {
   return (
     <div className="header">
@@ -12,6 +15,7 @@ function User() {
         <br />
         name
       </h1>
+      <Button className="edit-button" text="Edit Name" />
     </div>
   );
 }
