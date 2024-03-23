@@ -1,13 +1,15 @@
-import React from 'react'
+// IMPORT
+import React from "react";
 
+// COMPOSANTS
+import Form from "../../components/Form/Form";
 
 function Login() {
   return (
-    <div>
-       <p> Login</p>
-    </div>
-   
-  )
+    <>
+      <Form />
+    </>
+  );
 }
 
-export default Login
+export default Login;

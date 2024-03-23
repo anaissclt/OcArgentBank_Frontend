@@ -1,5 +1,8 @@
-import React from 'react'
-import "./banner.css"
+// IMPORT
+import React from "react";
+
+// STYLE
+import "./banner.css";
 
 function Banner() {
   return (
@@ -12,7 +15,7 @@ function Banner() {
         <p className="text">Open a savings account with Argent Bank today!</p>
       </section>
     </div>
-  )
+  );
 }
 
-export default Banner
+export default Banner;
