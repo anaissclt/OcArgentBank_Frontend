@@ -13,7 +13,7 @@ function User() {
       <h1>
         Welcome back
         <br />
-        name
+        name !
       </h1>
       <Button className="edit-button" text="Edit Name" />
     </div>

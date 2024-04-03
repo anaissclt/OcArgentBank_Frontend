@@ -32,3 +32,10 @@
   color: #fff;
   text-decoration: underline;
 }
+
+.error-message {
+  position: absolute;
+  color: red;
+  font-weight: bold;
+  left:20%;
+}
