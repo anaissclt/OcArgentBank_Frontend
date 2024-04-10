@@ -8,12 +8,13 @@ import "./user.css";
 import Button from "../Button/Button";
 
 function User() {
+
   return (
     <div className="header">
       <h1>
         Welcome back
         <br />
-        name !
+         firstName lastName
       </h1>
       <Button className="edit-button" text="Edit Name" />
     </div>

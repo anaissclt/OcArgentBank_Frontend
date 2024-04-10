@@ -1,10 +1,10 @@
-// Import
+// IMPORT
 import React, { useState, useEffect } from "react";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLogin } from "../../features/userSlice";
+import { fetchLogin } from "../../features/authSlice";
 import { useNavigate } from "react-router-dom";
 
 // STYLE
@@ -38,6 +38,10 @@ function Form() {
       return () => clearTimeout(timeout);
     }
   }, [error]);
+
+  const handleLogin = () => {
+    dispatch(fetchLogin({ email, password, rememberMe }));
+  };
 
   // Soumission du formulaire
   const handleSubmit = async (event) => {
@@ -92,10 +96,10 @@ function Form() {
             id="rememberMe"
             text="Remember me"
             checked={rememberMe}
-            onChange={(e) => setRememberMe(e.target.checked)}
+            onChange={() => setRememberMe(!rememberMe)}
             autoComplete="off"
           />
-          <Button className="sign-in-button" text="Sign In"></Button>
+          <Button className="sign-in-button" text="Sign In" onClick={handleLogin}></Button>
           {loginError && <div className="error-message">{loginError}</div>}
         </form>
       </section>

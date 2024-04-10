@@ -1,16 +1,19 @@
+// IMPORT
 import React from 'react';
 import { faCircleUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
-import '../../layouts/Header/header.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../../features/userSlice';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+// STYLE
+import '../../layouts/Header/header.css';
+
+// COMPOSANTS
+import { logOut } from '../../features/authSlice';
 
 function Connect() {
   // Utilisation du hook useSelector pour obtenir les données de l'utilisateur connecté
-    const { userName } = useSelector(state => state.auth) || {};
     const dispatch = useDispatch(); // Hook useDispatch pour dispatcher des actions Redux
     const navigate = useNavigate() // Hook de navigation de React Router
   
@@ -26,7 +29,7 @@ function Connect() {
       <>
         <div>
           <NavLink to="/profile" className="navigation__item">
-            <FontAwesomeIcon icon={faRightFromBracket} />{userName}
+            <FontAwesomeIcon icon={faRightFromBracket} />
           </NavLink>
   
           <NavLink className="navigation__item" onClick={handleLogOut}>

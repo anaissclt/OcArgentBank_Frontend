@@ -19,14 +19,14 @@ function Header() {
   const loggedIn = useSelector((state) => state.auth.isLoggedIn)
 
   return (
-    <nav class="main-nav">
-      <NavLink class="main-nav-logo" to={"/"}>
+    <nav className="main-nav">
+      <NavLink className="main-nav-logo" to={"/"}>
         <img
-          class="main-nav-logo-image"
+          className="main-nav-logo-image"
           src={argentBankLogo}
           alt="Argent Bank Logo"
         />
-        <h1 class="sr-only">Argent Bank</h1>
+        <h1 className="sr-only">Argent Bank</h1>
       </NavLink>
 
       {loggedIn ? <Connect/> : 

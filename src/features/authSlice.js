@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchLogin = createAsyncThunk(
-  'auth/login',
+  "auth/login",
   async ({ email, password, rememberMe }, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:3001/api/v1/user/login', {
-        method: 'POST',
+      console.log("Logging in with:", email, password, rememberMe);
+      const response = await fetch("http://localhost:3001/api/v1/user/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
@@ -19,18 +20,28 @@ export const fetchLogin = createAsyncThunk(
           throw new Error("Email ou mot de passe invalide.");
         } else {
           // Gérer d'autres erreurs de requête
-          throw new Error("Une erreur s'est produite. Veuillez réessayer plus tard.");
+          throw new Error(
+            "Une erreur s'est produite. Veuillez réessayer plus tard."
+          );
         }
       }
-      
-      const { token } = await response.json();
+
+      const responseJson = await response.json();
+      console.log("Response from API:", responseJson);
+
+      const { token } = responseJson.body;
+      console.log("Token:", token);
 
       if (rememberMe) {
-        localStorage.setItem('token', token);
+        localStorage.setItem("token", token);
+        console.log("Token in localStorage:", localStorage.getItem("token"));
       } else {
-        sessionStorage.setItem('token', token);
+        sessionStorage.setItem("token", token);
+        console.log(
+          "Token in sessionStorage:",
+          sessionStorage.getItem("token")
+        );
       }
-
       return token;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -43,6 +54,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     userName: null,
+
     isLoggedIn: false,
     token: null,
     error: null,
