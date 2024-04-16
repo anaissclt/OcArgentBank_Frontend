@@ -4,14 +4,13 @@ export const fetchUserProfile = createAsyncThunk(
   'profile/fetchUserProfile',
   async (_, thunkAPI) => {
     try {
-        const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+        const token = sessionStorage.getItem("token") || localStorage.getItem("token");
         const response = await fetch("http://localhost:3001/api/v1/user/profile", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify({}),
+          }
         });
 
       if (!response.ok) {
@@ -20,10 +19,11 @@ export const fetchUserProfile = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log("Data received from API:", data); // Affichez les données reçues
+      console.log("Données reçues de l'API:", data); // Affichez les données reçues
       
       return data.body;
     } catch (err) {
+        console.log(err)
       return thunkAPI.rejectWithValue(err.message);
     }
   }
