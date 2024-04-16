@@ -51,3 +51,15 @@
   margin-right: 5px;
   text-decoration: none;
 }
+
+.navigation__item {
+  text-decoration: none;
+  margin-right: 1rem;
+}
+.navigation__item:hover {
+  max-width: 100%;
+  width: 200px;
+}
+.svg-inline--fa {
+  margin-right: 2px;
+}
