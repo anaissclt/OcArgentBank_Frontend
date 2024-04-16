@@ -65,6 +65,14 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.token = null;
       state.error = null;
+
+      // Supprime le token de localStorage
+      localStorage.removeItem("token");
+    },
+    setLoggedIn(state, action) {
+      // Met à jour l'état pour indiquer que l'utilisateur est connecté avec un token
+      state.isLoggedIn = true;
+      state.token = action.payload.token;
     },
   },
   extraReducers: (builder) => {
@@ -86,5 +94,12 @@ const authSlice = createSlice({
   },
 });
 
-export const { logOut } = authSlice.actions;
+export const { logOut, setLoggedIn } = authSlice.actions;
+
+// Action pour se connecter avec un token
+export const logInWithToken = (token) => (dispatch) => {
+  // MAJ de l'état pour indiquer que l'utilisateur est connecté avec le token
+  dispatch(authSlice.actions.setLoggedIn({ token }));
+};
+
 export default authSlice.reducer;
