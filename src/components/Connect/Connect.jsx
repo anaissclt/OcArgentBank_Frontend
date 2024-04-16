@@ -16,7 +16,10 @@ function Connect() {
   // Utilisation du hook useSelector pour obtenir les données de l'utilisateur connecté
     const dispatch = useDispatch(); // Hook useDispatch pour dispatcher des actions Redux
     const navigate = useNavigate() // Hook de navigation de React Router
-    const { firstName } = useSelector(state => state.profile)
+    const { firstName } = useSelector(state => state.profile);
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
+    const rememberMe = localStorage.getItem("token") !== null;
   
     const handleLogOut = (e) => {
       e.preventDefault();
@@ -29,16 +32,19 @@ function Connect() {
   
     return (
       <>
-        <div>
-          <NavLink to="/profile" className="navigation__item">
-            <FontAwesomeIcon icon={faRightFromBracket} />{firstName}
-          </NavLink>
-  
-          <NavLink className="navigation__item" onClick={handleLogOut}>
-            <FontAwesomeIcon icon={faCircleUser} />
-            Log Out
-          </NavLink>
-        </div>
+         <div>
+        {isLoggedIn || rememberMe ? ( // Vérifie si l'utilisateur est connecté et/ou "Remember Me" est activé
+          <>
+            <NavLink to="/profile" className="navigation__item">
+              <FontAwesomeIcon icon={faCircleUser} />{firstName}
+            </NavLink>
+            <NavLink className="navigation__item" onClick={handleLogOut}>
+              <FontAwesomeIcon icon={faRightFromBracket} />
+              Sign Out
+            </NavLink>
+          </>
+        ) : null}
+      </div>
       </>
     );
   }
