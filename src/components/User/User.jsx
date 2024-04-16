@@ -18,17 +18,16 @@ function User() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("Calling fetchUserProfile");
     dispatch(fetchUserProfile());
   }, [dispatch, token]);
 
   // Vérification si firstName et lastName sont définis
   const displayName = firstName && lastName ? `${firstName} ${lastName}` : '';
-  
+
   return (
     <div className="header">
            <h1>Welcome back<br />{displayName || 'Loading...'}!</h1>
-           <Button className="edit-button" text="Edit"></Button>
+           <Button className="edit-button" text="Edit Name"></Button>
     </div>
   );
 }
