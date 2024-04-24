@@ -13,10 +13,10 @@ import '../../layouts/Header/header.css';
 import { logOut } from '../../features/authSlice';
 
 function Connect() {
-  // Utilisation du hook useSelector pour obtenir les données de l'utilisateur connecté
+  
     const dispatch = useDispatch(); // Hook useDispatch pour dispatcher des actions Redux
     const navigate = useNavigate() // Hook de navigation de React Router
-    const { firstName } = useSelector(state => state.profile);
+    const { userName } = useSelector(state => state.profile);
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
     const rememberMe = localStorage.getItem("token") !== null;
@@ -24,7 +24,7 @@ function Connect() {
     const handleLogOut = (e) => {
       e.preventDefault();
       // Dispatch pour déconnecter l'utilisateur
-      dispatch(logOut(navigate("/login")));
+      dispatch(logOut(navigate("/")));
       // Suppression du token de sessionStorage et du localStorage
       sessionStorage.removeItem("token");
       localStorage.removeItem("token");
@@ -36,7 +36,7 @@ function Connect() {
         {isLoggedIn || rememberMe ? ( // Vérifie si l'utilisateur est connecté et/ou "Remember Me" est activé
           <>
             <NavLink to="/profile" className="navigation__item">
-              <FontAwesomeIcon icon={faCircleUser} />{firstName}
+              <FontAwesomeIcon icon={faCircleUser} />{userName}
             </NavLink>
             <NavLink className="navigation__item" onClick={handleLogOut}>
               <FontAwesomeIcon icon={faRightFromBracket} />

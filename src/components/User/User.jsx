@@ -26,6 +26,7 @@ function User() {
 
   const [isEditing,setIsEditing] = useState(false);
 
+   // Fonction pour inverse l'état de isEditing
   const toggleEditing = () => {
     setIsEditing(!isEditing);
   };
@@ -35,7 +36,7 @@ function User() {
       {isEditing ? (
         <div>
           <h1> Edit user info </h1>
-          <EditUser />
+          <EditUser  toggleEditing={toggleEditing}/>
         </div>
       ) : (
         <div>

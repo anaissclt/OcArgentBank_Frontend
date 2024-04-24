@@ -7,6 +7,13 @@
   padding-top: 30px;
 }
 
+@media (max-width: 920px) {
+  .bg-dark {
+    height: 100vh;
+  }
+}
+
+
 .sign-in-content {
   box-sizing: border-box;
   background-color: white;
@@ -34,8 +41,8 @@
 }
 
 .error-message {
-  position: absolute;
-  color: red;
+  color: rgb(44, 32, 32);
   font-weight: bold;
   left:20%;
+  font-size: 1.2em;
 }

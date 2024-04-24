@@ -26,19 +26,6 @@ function Form() {
   const [rememberMe, setRememberMe] = useState(false);
   const [loginError, setLoginError] = useState(null);
 
-  // Effet pour gérer les erreurs de connexion
-  useEffect(() => {
-    if (error) {
-      // Mettre à jour le message d'erreur
-      setLoginError(error);
-      const timeout = setTimeout(() => {
-        setLoginError("");
-      }, 1500);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [error]);
-
   const handleLogin = () => {
     dispatch(fetchLogin({ email, password, rememberMe }));
   };
@@ -48,13 +35,24 @@ function Form() {
     event.preventDefault();
     try {
       // Dispatch de l'action fetchLogin avec les données du formulaire
-      dispatch(fetchLogin({ email, password, rememberMe }));
+      await dispatch(fetchLogin({ email, password, rememberMe }));
     } catch (error) {
       // En cas d'erreur, nettoyer le token de session
       console.log(error);
       sessionStorage.removeItem("token");
     }
+  
+    // Vérifier si l'email ou le mot de passe est incorrect
+    if (!isLoggedIn && (email !== "email_correct" || password !== "mot_de_passe_correct")) {
+      setLoginError("Identifiant ou mot de passe incorrect"); 
+      return;
+    }
   };
+
+  // Réinitialiser le message d'erreur lorsque le champ de mot de passe ou d'email est modifié
+  useEffect(() => {
+    setLoginError("");
+  }, [email, password]);
 
   // Redirection après une connexion réussie
   useEffect(() => {
@@ -99,7 +97,11 @@ function Form() {
             onChange={() => setRememberMe(!rememberMe)}
             autoComplete="off"
           />
-          <Button className="sign-in-button" text="Sign In" onClick={handleLogin}></Button>
+          <Button
+            className="sign-in-button"
+            text="Sign In"
+            onClick={handleLogin}
+          ></Button>
           {loginError && <div className="error-message">{loginError}</div>}
         </form>
       </section>

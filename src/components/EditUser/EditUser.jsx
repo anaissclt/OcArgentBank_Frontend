@@ -1,6 +1,6 @@
 // IMPORT
-import React from "react";
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // STYLE
 import "./edituser.css";
@@ -8,28 +8,36 @@ import "./edituser.css";
 // COMPOSANTS
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import { updateUserName } from '../../features/userSlice';
 
-function EditUser() {
+function EditUser({ toggleEditing }) {
 
     const { firstName, lastName, userName } = useSelector(state => state.profile);
+    const [newUserName, setNewUserName] = useState(userName);
+    const dispatch = useDispatch();
 
-    const handleSave = (e) => {
-        e.preventDefault(); // Empêche la soumission du formulaire
+    // Fonction pour enregistrer les modifications
+    const handleSave = () => {
+      toggleEditing();
+      dispatch(updateUserName(newUserName));
     };
-
-    const handleCancel = (e) => {
-        e.preventDefault();
+  
+    // Fonction pour la soumission du formulaire
+    const handleSubmit = (e) => {
+      e.preventDefault(); // Empêche la soumission du formulaire
+      handleSave();
     };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Input
         className="input-wrapper input-wrapper--edit"
         htmlFor="UserName"
         text="User Name: "
         type="text"
         id="UserName"
-        value={userName }
+        value={newUserName}
+        onChange={(e) => setNewUserName(e.target.value)}
         autoComplete="off"
       />
      
@@ -53,8 +61,9 @@ function EditUser() {
           value={lastName}
         />
      
-      <Button className="edit-button" text="Save"  type="submit" onClick={handleSave} />
-      <Button className="edit-button" text="Cancel"  onClick={handleCancel}/>
+      <Button className="edit-button" text="Save"  type="submit" />
+      {/* mode édition désactivé avec onClick={toggleEditing} */}
+      <Button className="edit-button" text="Cancel"  onClick={toggleEditing} />
     </form>
   );
 }
