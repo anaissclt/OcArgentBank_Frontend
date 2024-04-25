@@ -7,9 +7,10 @@ import "./accounts.css";
 // COMPOSANTS
 import Button from "../Button/Button";
 
+// Le composant prend props en argument
 function Accounts(props) {
-  // Déstructure les propriétés passées en tant que "props"
-  // Elles peuvent être utilisées sans utiliser props.(propriétés)...
+  // Déstructure les propriétés passées au composant
+  // plutôt d'utiliser props.title, props.amount on peut les utiliser comme title, amount,
   const { title, amount, description } = props;
   return (
     <>

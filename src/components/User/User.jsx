@@ -12,21 +12,20 @@ import EditUser from "../EditUser/EditUser";
 
 function User() {
   const token = useSelector((state) => state.auth.token);
-  // console.log("Token user", token);
   const { firstName, lastName } = useSelector((state) => state.profile); // Utilisation de firstName et lastName
-  // console.log("Profile State:", { firstName, lastName });
   const dispatch = useDispatch();
 
+  //charge le profil de l'utilisateur
   useEffect(() => {
     dispatch(fetchUserProfile());
   }, [dispatch, token]);
 
-  // Vérification si firstName et lastName sont définis
+  // Crée une variable qui contient le nom de l'utilisateur s'il est disponible, sinon une chaîne vide
   const displayName = firstName && lastName ? `${firstName} ${lastName}` : "";
 
   const [isEditing,setIsEditing] = useState(false);
 
-   // Fonction pour inverse l'état de isEditing
+   // fonction toggleEditing qui inverse l'état de isEditing
   const toggleEditing = () => {
     setIsEditing(!isEditing);
   };
@@ -36,7 +35,8 @@ function User() {
       {isEditing ? (
         <div>
           <h1> Edit user info </h1>
-          <EditUser  toggleEditing={toggleEditing}/>
+          {/* toggleEditing est passée en tant que prop pour permettre à EditUser de basculer hors du mode édition */}
+          <EditUser  toggleEditing={toggleEditing}/> 
         </div>
       ) : (
         <div>

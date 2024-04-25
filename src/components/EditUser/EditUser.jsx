@@ -10,6 +10,8 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import { updateUserName } from '../../features/userSlice';
 
+// La fonction prend la prop toggleEditing en argument
+//qui est une fonction pour activer/désactiver le mode édition
 function EditUser({ toggleEditing }) {
 
     const { firstName, lastName, userName } = useSelector(state => state.profile);
@@ -62,7 +64,7 @@ function EditUser({ toggleEditing }) {
         />
      
       <Button className="edit-button" text="Save"  type="submit" />
-      {/* mode édition désactivé avec onClick={toggleEditing} */}
+      {/* la fonction toggleEditing, qui désactive le mode d'édition */}
       <Button className="edit-button" text="Cancel"  onClick={toggleEditing} />
     </form>
   );

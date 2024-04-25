@@ -5,6 +5,7 @@ import React from "react";
 import "./input.css";
 
 export default function Input(props) {
+   // Déstructure les props passées
   const { className, htmlFor, type, id, text, value, onChange, onSubmit, autocomplete , disabled} = props;
   return (
     <div className={className}>

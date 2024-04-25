@@ -26,6 +26,7 @@ function Form() {
   const [rememberMe, setRememberMe] = useState(false);
   const [loginError, setLoginError] = useState(null);
 
+  // dispatche l'action fetchLogin avec les données du formulaire
   const handleLogin = () => {
     dispatch(fetchLogin({ email, password, rememberMe }));
   };
@@ -34,11 +35,10 @@ function Form() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Dispatch de l'action fetchLogin avec les données du formulaire
+      // Dispatch l'action fetchLogin avec les données du formulaire
       await dispatch(fetchLogin({ email, password, rememberMe }));
     } catch (error) {
       // En cas d'erreur, nettoyer le token de session
-      console.log(error);
       sessionStorage.removeItem("token");
     }
   
@@ -52,14 +52,14 @@ function Form() {
   // Réinitialiser le message d'erreur lorsque le champ de mot de passe ou d'email est modifié
   useEffect(() => {
     setLoginError("");
-  }, [email, password]);
+  }, [email, password]);  // déclenche chaque fois que la valeur de email ou de password change
 
   // Redirection après une connexion réussie
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/profile");
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn, navigate]); //déclenche chaque fois que la valeur de isLoggedIn ou navigate change
 
   return (
     <main className="main bg-dark">
