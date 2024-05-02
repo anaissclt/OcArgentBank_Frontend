@@ -9,7 +9,7 @@ import {  useSelector } from "react-redux"
 import "./header.css";
 
 // ASSETS
-import argentBankLogo from "../../assets/argentBankLogo.png";
+import argentBankLogo from "../../assets/argentBankLogo.webp";
 
 // COMPOSANTS
 import Connect from '../../components/Connect/Connect';
