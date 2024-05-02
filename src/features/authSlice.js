@@ -4,7 +4,6 @@ export const fetchLogin = createAsyncThunk(
   "auth/login",
   async ({ email, password, rememberMe }, { rejectWithValue }) => {
     try {
-      console.log("Logging in with:", email, password, rememberMe);
       const response = await fetch("http://localhost:3001/api/v1/user/login", {
         method: "POST",
         headers: {
@@ -27,20 +26,13 @@ export const fetchLogin = createAsyncThunk(
       }
 
       const responseJson = await response.json();
-      console.log("Response from API:", responseJson);
 
       const { token } = responseJson.body;
-      console.log("Token:", token);
 
       if (rememberMe) {
         localStorage.setItem("token", token);
-        console.log("Token in localStorage:", localStorage.getItem("token"));
       } else {
         sessionStorage.setItem("token", token);
-        console.log(
-          "Token in sessionStorage:",
-          sessionStorage.getItem("token")
-        );
       }
       return token;
     } catch (error) {

@@ -19,7 +19,6 @@ export const fetchUserProfile = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log("Données reçues de l'API:", data); // Affichez les données reçues
       
       return data.body;
     } catch (err) {
