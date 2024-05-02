@@ -65,7 +65,7 @@ function EditUser({ toggleEditing }) {
      
       <Button className="edit-button" text="Save"  type="submit" />
       {/* la fonction toggleEditing, qui désactive le mode d'édition */}
-      <Button className="edit-button" text="Cancel"  onClick={toggleEditing} />
+      <Button className="edit-button" text="Cancel"  onClick={toggleEditing} type="button"/>
     </form>
   );
 }
